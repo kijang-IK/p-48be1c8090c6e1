@@ -99,6 +99,12 @@ nav.top a:hover,nav.top a.on{color:var(--ink);background:var(--surface);border-c
 .mapinfo .lg{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:6px;color:var(--muted);font-size:.8rem}
 .mapinfo .lg i{display:inline-block;width:18px;height:0;border-top:4px solid;vertical-align:middle;margin-right:5px}
 .links{display:flex;gap:16px;flex-wrap:wrap}
+.mlist{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:4px}
+.mi{display:flex;gap:10px;align-items:flex-start;padding:7px 8px;border-radius:10px;cursor:pointer}
+.mi:hover{background:var(--surface2)}
+.mi small{display:block;color:var(--muted);font-size:.78rem;line-height:1.4}
+.mi small.lgs{margin-top:2px}
+.mn{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:.72rem;margin-top:1px}
 .lb{margin:7px 0 3px;border:1px solid var(--line);border-radius:10px;background:var(--surface2);padding:7px 10px;font-size:.8rem}
 .lbh{display:flex;gap:8px;align-items:center;margin-bottom:5px;color:var(--ink)}
 .lbh b{font-size:.84rem}
@@ -231,7 +237,7 @@ footer a{color:var(--muted)}
 
 <section id="map">
   <div class="sec-head"><h2>루트 지도</h2>
-  <p class="sub">실제 지도 위에 도로 경로를 그렸습니다. 날짜를 눌러 보세요. 숫자는 방문 순서, 점선 원은 예비 일정, 초록 점선은 연장 코스입니다. 지도 타일은 인터넷에 연결돼 있어야 보입니다.</p></div>
+  <p class="sub">실제 지도 위에 도로 경로를 그렸습니다. 날짜를 누르면 그날 일정만 지도와 목록에 나옵니다. 숫자는 방문 순서, 점선 원은 예비 일정, 초록 점선은 연장 코스입니다. 지도 타일은 인터넷에 연결돼 있어야 보입니다.</p></div>
   <div class="mapbox">
     <div class="maprow"><span class="ml">기본 일정</span><div class="chips" id="chipsBase"></div></div>
     <div class="maprow"><span class="ml">연장 코스</span><div class="chips" id="chipsExt"></div></div>
@@ -664,7 +670,7 @@ const GEO={"d1":{"p":[[33.9416,-118.4085],[34.0618,-118.3007],[34.0634,-118.299]
   function route(lines,col,w,dash){lines.forEach(l=>{
     L.polyline(l,{color:'#fff',weight:w+3,opacity:.9}).addTo(group);
     L.polyline(l,{color:col,weight:w,opacity:.95,dashArray:dash||null,lineCap:'round',lineJoin:'round'}).addTo(group);});}
-  let cur='all';
+  let cur='d1';
   function select(key){
     cur=key;group.clearLayers();const bounds=[];
     document.querySelectorAll('#chipsBase .chip,#chipsExt .chip').forEach(c=>c.setAttribute('aria-pressed',String(c.dataset.k===key)));
@@ -679,26 +685,30 @@ const GEO={"d1":{"p":[[33.9416,-118.4085],[34.0618,-118.3007],[34.0634,-118.299]
       const d=KEYMAP[key],g=GEO[key],col=css(TYPES[d.type].v);
       route(g.g,col,5,d.type==='ext'?'10 8':null);
       g.g.forEach(l=>l.forEach(p=>bounds.push(p)));
+      const ms=[];
       g.p.forEach((p,i)=>{const s=d.stops[i]||{};
-        L.marker(p,{icon:L.divIcon({className:'',html:'<div class="pin" style="background:'+col+';color:'+textOn(col)+'">'+(i+1)+'</div>',iconSize:[26,26],iconAnchor:[13,13]}),zIndexOffset:500+i})
-          .bindPopup('<b>'+(s.tm||'')+' '+(s.nm||'')+'</b>'+(s.nt?'<br>'+s.nt:'')+legSum(key,i,s)).addTo(group);
+        ms.push(L.marker(p,{icon:L.divIcon({className:'',html:'<div class="pin" style="background:'+col+';color:'+textOn(col)+'">'+(i+1)+'</div>',iconSize:[26,26],iconAnchor:[13,13]}),zIndexOffset:500+i})
+          .bindPopup('<b>'+(s.tm||'')+' '+(s.nm||'')+'</b>'+(s.nt?'<br>'+s.nt:'')+legSum(key,i,s)).addTo(group));
         bounds.push(p);});
       (g.b||[]).forEach(b=>{
         L.marker([b.lat,b.lon],{icon:L.divIcon({className:'',html:'<div class="bpin"></div>',iconSize:[16,16],iconAnchor:[8,8]})})
-          .bindPopup('<b>예비 · '+b.n+'</b><br>'+(b.ds||'')).addTo(group);bounds.push([b.lat,b.lon]);});
+          .bindPopup('<b>예비 · '+b.n+'</b><br>'+(b.ds||'')).addTo(group);});
       const url=mapsUrl(d.stops);
       info.innerHTML='<b>'+d.d+'('+d.w+') '+d.t+'</b> · '+(d.car?(d.km?'운전 약 '+d.km+'km':'운전'):'차는 쓰지 않는 날')
         +'<div class="lg"><span>숫자 = 방문 순서</span>'+((g.b||[]).length?'<span>점선 원 = 예비 일정 (눌러 보기)</span>':'')
         +(url?'<a href="'+url+'" target="_blank" rel="noopener">구글 지도로 열기 ↗</a>':'')+'</div>';
+      const LG=LEGS[key]||[];
+      info.innerHTML+='<ol class="mlist">'+d.stops.map((s,i)=>{const l=LG[i];return '<li class="mi" data-i="'+i+'"><span class="mn" style="background:'+col+';color:'+textOn(col)+'">'+(i+1)+'</span><div><b>'+s.tm+'</b> '+s.nm+(s.nt?'<small>'+s.nt+'</small>':'')+(l&&i<d.stops.length-1?'<small class="lgs">↓ '+l.km+' · 도보 '+l.w+' · 차 '+l.c+' · 대중교통 '+l.t+(l.e?' (추정)':'')+'</small>':'')+'</div></li>';}).join('')+'</ol>';
+      info.querySelectorAll('.mi').forEach(el=>el.addEventListener('click',()=>{const i=+el.dataset.i;map.setView(g.p[i],Math.max(map.getZoom(),13));ms[i].openPopup();}));
     }
     map.fitBounds(bounds,{padding:[28,28]});
   }
   const cb=document.getElementById('chipsBase'),ce=document.getElementById('chipsExt');
-  cb.innerHTML='<button class="chip" data-k="all">전체</button>'+DAYS.map(d=>'<button class="chip" data-k="'+d.id+'">'+d.d+'</button>').join('');
+  cb.innerHTML=DAYS.map(d=>'<button class="chip" data-k="'+d.id+'">'+d.d+'</button>').join('')+'<button class="chip" data-k="all">전체 루트</button>';
   ce.innerHTML=[['e1','7/24 비벌리힐스·말리부'],['e3','7/25 다운타운'],['e2','유니버설'],['s1','샌디에이고 ①'],['s2','샌디에이고 ②'],['s3','북상 ③']]
     .map(x=>'<button class="chip" data-k="'+x[0]+'">'+x[1]+'</button>').join('');
   document.getElementById('map').addEventListener('click',e=>{const c=e.target.closest('.chip');if(c)select(c.dataset.k);});
-  select('all');
+  select('d1');
   window.showOnMap=key=>{select(key);document.getElementById('map').scrollIntoView({behavior:'smooth'});};
   document.addEventListener('click',e=>{const a=e.target.closest('[data-map]');if(a){e.preventDefault();window.showOnMap(a.dataset.map);}});
   const refit=()=>{map.invalidateSize();select(cur);};
