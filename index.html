@@ -67,7 +67,7 @@ nav.top a:hover,nav.top a.on{color:var(--ink);background:var(--surface);border-c
 .tile .d small{font-weight:500;color:var(--muted);margin-left:4px}
 .tile .t{font-size:.88rem;margin:2px 0 6px;min-height:2.6em;line-height:1.35}
 .tile .s{font-size:.78rem;color:var(--muted)}
-.tag{display:inline-block;font-size:.72rem;font-weight:600;padding:1px 8px;border-radius:999px;
+.tag{display:inline-block;white-space:nowrap;font-size:.72rem;font-weight:600;padding:1px 8px;border-radius:999px;
   color:var(--tc);background:color-mix(in srgb,var(--tc) 14%,transparent)}
 .carbar{margin-top:18px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow)}
 .carbar h3{font-size:.95rem;margin-bottom:10px}
@@ -87,11 +87,11 @@ nav.top a:hover,nav.top a.on{color:var(--ink);background:var(--surface);border-c
 .mapbox{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px;box-shadow:var(--shadow)}
 .maprow{display:flex;gap:10px;align-items:center;margin-bottom:6px}
 .ml{font-size:.78rem;color:var(--muted);white-space:nowrap;min-width:4.2em}
-.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin;min-width:0;max-width:100%}
 .chip{font:inherit;font-size:.84rem;border:1px solid var(--line);background:var(--surface2);color:var(--ink);padding:5px 12px;border-radius:999px;cursor:pointer;white-space:nowrap}
 .chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 #leaflet{height:540px;border-radius:12px;margin-top:8px;position:relative;z-index:0;background:var(--surface2)}
-@media(max-width:640px){#leaflet{height:430px}.maprow{flex-direction:column;align-items:flex-start;gap:2px}}
+@media(max-width:640px){#leaflet{height:430px}.maprow{flex-direction:column;align-items:stretch;gap:2px}}
 .leaflet-container{font-family:inherit}
 .pin{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:12px;border:2.5px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.45)}
 .bpin{width:16px;height:16px;border-radius:50%;border:2px dashed #444;background:rgba(255,255,255,.85)}
@@ -99,6 +99,16 @@ nav.top a:hover,nav.top a.on{color:var(--ink);background:var(--surface);border-c
 .mapinfo .lg{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:6px;color:var(--muted);font-size:.8rem}
 .mapinfo .lg i{display:inline-block;width:18px;height:0;border-top:4px solid;vertical-align:middle;margin-right:5px}
 .links{display:flex;gap:16px;flex-wrap:wrap}
+.lb{margin:7px 0 3px;border:1px solid var(--line);border-radius:10px;background:var(--surface2);padding:7px 10px;font-size:.8rem}
+.lbh{display:flex;gap:8px;align-items:center;margin-bottom:5px;color:var(--ink)}
+.lbh b{font-size:.84rem}
+.wr{font-size:.68rem;color:var(--c-la);border:1px solid color-mix(in srgb,var(--c-la) 45%,var(--line));border-radius:999px;padding:0 7px}
+.lbg{display:grid;grid-template-columns:.8fr 1.25fr 1.45fr;gap:8px}
+.lbg small{display:block;color:var(--muted);font-size:.7rem}
+.lbg b{font-size:.83rem;font-weight:600;line-height:1.35;display:block}
+.lbg em{display:block;font-style:normal;font-size:.7rem;color:var(--muted)}
+.lbd{margin-top:6px;padding-top:6px;border-top:1px dashed var(--line);color:var(--muted);font-size:.76rem}
+.est{font-size:.64rem;border:1px solid var(--warn-line);background:var(--warn-bg);color:var(--ink);border-radius:4px;padding:0 4px;display:block;width:fit-content;margin:2px 0 0;white-space:nowrap}
 /* day cards */
 .days{display:grid;grid-template-columns:1fr;gap:16px}
 @media(min-width:900px){.days{grid-template-columns:1fr 1fr}}
@@ -232,7 +242,7 @@ footer a{color:var(--muted)}
 
 <section id="days">
   <div class="sec-head"><h2>날짜별 일정</h2>
-  <p class="sub">각 구간의 소요 시간은 초안의 “보통(교통 반영)” 값입니다. 점선 칩은 시간이 남을 때 가는 예비 일정입니다.</p></div>
+  <p class="sub">장소와 장소 사이 박스에 거리, 도보, 차량, 대중교통 시간을 넣었습니다. 차량은 “막히지 않으면”과 “보통(교통 반영)” 값이고, 도보는 시속 약 5km 기준입니다. 점선 칩은 시간이 남을 때 가는 예비 일정입니다.</p></div>
   <div class="callout" style="margin-bottom:16px"><b>초안과 다르게 보정한 시간 3곳</b> (이 페이지에서만 조정, 원본은 그대로)
     <ul class="plain">
       <li><b>7/20 앤텔로프 도착</b> 10:30 → 약 12:30. 05:30 출발에 버스 이동 6시간 57분을 더하면 그렇습니다. 입장 슬롯은 투어사에 확인하세요.</li>
@@ -370,7 +380,7 @@ footer a{color:var(--muted)}
         <li class="unk">다저스–에인절스 7/18 경기 시작 시각</li>
         <li class="unk">캐니언 투어 업체별 순서와 시각, 비거주자 입장료 처리 방식</li>
         <li class="unk">IDP와 한국 면허 조합의 캘리포니아 현행 인정 범위 (DMV·대사관 확인 권장)</li>
-        <li class="unk">연장 코스의 구간 시간은 일반적인 도로 사정 기준 추정이라 구글 지도 링크로 재확인하세요.</li>
+        <li class="unk">연장 코스의 차량 시간은 도로 계산값에 초안과 같은 교통 배율을 곱한 값이고, 연장 코스의 <b>대중교통 시간(추정 표시)</b>은 노선을 확인하지 않은 어림값입니다. 구글 지도 링크로 재확인하세요.</li>
       </ul></div>
   </div>
 </section>
@@ -570,10 +580,25 @@ function mapsUrl(stops){
   return 'https://www.google.com/maps/dir/?api=1&travelmode=driving&origin='+encodeURIComponent(qs[0])
    +'&destination='+encodeURIComponent(qs[qs.length-1])+(mid?'&waypoints='+encodeURIComponent(mid):'');
 }
+const LEGS={"d1":[{"km":"24km","w":"—","c":"35–45분","f":"25분","t":"80–95분","td":"LAX/Metro Transit Center → K라인 → Expo/Crenshaw에서 E라인 → 7th St/Metro Center에서 B·D라인 → Wilshire/Vermont · $1.75 (TAP 카드)"},{"km":"0.4km","w":"약 5분","c":"탈 필요 없음","wr":1,"t":"걸어서 이동","td":"호텔 주변"}],"d2":[{"km":"8.8km","w":"—","c":"18–26분","f":"13분","t":"45–55분","td":"윌셔/버몬트 → 버스 Metro 204(버몬트 북행) → Melrose에서 Metro 10 서행 · $1.75 (2시간 내 환승 무료)"},{"km":"0.7km","w":"약 8분","c":"6–7분","f":"1분","wr":1,"t":"걸어서 이동","td":"멜로즈 애비뉴 따라 동쪽"},{"km":"2.5km","w":"약 30분","c":"9–11분","f":"4분","t":"걸어서 이동","td":"페어팩스 애비뉴 따라 남쪽"},{"km":"5.6km","w":"—","c":"14–19분","f":"9분","t":"30–40분","td":"Metro 217번 버스 (페어팩스 북행) → 할리우드 블러바드 · $1.75"},{"km":"8.3km","w":"—","c":"21–29분","f":"15분","t":"35–45분","td":"B라인 Hollywood/Highland → Vermont/Sunset → DASH 옵저버토리 버스 · $1.75 + DASH $0.50"},{"km":"9km","w":"—","c":"22–31분","f":"16분","t":"40–50분","td":"DASH로 하산 → B라인 Vermont/Sunset → Wilshire/Vermont · $1.75 + $0.50"}],"d3":[{"km":"21km","w":"—","c":"36–47분","f":"26분","t":"75–90분","td":"D라인 → 7th St/Metro → E라인 Downtown Santa Monica → 빅 블루 버스 1번(메인 스트리트 남행) · $1.75 + $1.10"},{"km":"0.8km","w":"약 10분","c":"7–8분","f":"2분","wr":1,"t":"걸어서 이동","td":""},{"km":"3.7km","w":"약 45분","c":"12–16분","f":"7분","t":"자전거 20분","td":"해변 산책로 · 공유 자전거 Metro Bike 30분 약 $1.75"},{"km":"30km","w":"—","c":"41–51분","f":"29분","t":"85–100분","td":"E라인 Downtown Santa Monica → 7th St/Metro → B·D라인 Union Station → 다저 스타디움 익스프레스 · $1.75 (익스프레스는 티켓 소지 시 무료)"},{"km":"7.5km","w":"—","c":"20–27분","f":"14분","t":"45–60분","td":"익스프레스로 Union Station → D라인 Wilshire/Vermont (탑승 대기 포함) · $1.75"}],"d4":[{"km":"183km","w":"—","c":"2시간 33분–2시간 53분","f":"2시간 13분","t":"직행 버스 5시간 30분–6시간 30분","td":"LA→베가스 전체 기준. 플릭스버스·그레이하운드 또는 항공(공항 이동 포함 약 4시간) · 버스 $30–60 / 항공 $80–200"},{"km":"252km","w":"—","c":"3시간 18분–3시간 44분","f":"2시간 52분","t":"위 구간과 동일","td":""},{"km":"1.5km","w":"약 20분","c":"9–11분","f":"4분","wr":1,"t":"걸어서 이동","td":"스트립은 걸어서 이동, 먼 곳은 듀스 버스"}],"d5":[{"km":"459km","w":"—","c":"렌터카 안 씀","t":"투어 버스 약 6시간 57분","td":"정기 대중교통 없음"},{"km":"20km","w":"—","c":"렌터카 안 씀","t":"투어 버스 약 1시간 6분","td":"정기 대중교통 없음"},{"km":"8.7km","w":"—","c":"렌터카 안 씀","t":"투어 버스 약 20분","td":"정기 대중교통 없음"}],"d6":[{"km":"184km","w":"—","c":"렌터카 안 씀","t":"투어 버스 약 2시간 46분","td":"정기 대중교통 없음"},{"km":"37km","w":"—","c":"렌터카 안 씀","t":"투어 버스 약 59분","td":"공원 안은 무료 셔틀 버스 운행"},{"km":"446km","w":"—","c":"렌터카 안 씀","t":"투어 버스 약 6시간 9분","td":"정기 대중교통 없음"}],"d7":[{"km":"253km","w":"—","c":"3시간 19분–3시간 45분","f":"2시간 53분","t":"직행 버스 5시간 30분–6시간","td":"베가스→애너하임 전체 기준. 플릭스버스(ARTIC역) 또는 항공 LAS→SNA(공항 이동 포함 약 4시간) · 버스 $30–60 / 항공 $80–200"},{"km":"169km","w":"—","c":"2시간 21분–2시간 40분","f":"2시간 3분","t":"위 구간과 동일","td":""},{"km":"2.8km","w":"약 35분","c":"11–15분","f":"6분","t":"걸어서 이동","td":""}],"d8":[{"km":"0.2km","w":"약 2분","c":"탈 필요 없음","wr":1,"t":"걸어서 이동","td":""},{"km":"0.2km","w":"약 2분","c":"탈 필요 없음","wr":1,"t":"걸어서 이동","td":""}],"d9":[{"km":"55km","w":"—","c":"1시간 4분–1시간 19분","f":"46분","t":"첫차 시간상 어려움","td":"새벽이라 메트로링크·플라이어웨이로는 07:50 도착이 어렵습니다. 차량 호출(XL) 약 $90–130"}],"e1":[{"km":"60km","w":"—","c":"1시간 11분–1시간 27분","f":"51분","t":"약 2시간 30분–3시간","td":"버스·메트로링크·메트로 환승이 필요합니다","e":1},{"km":"22km","w":"—","c":"35–45분","f":"25분","t":"약 1시간 30분–2시간","td":"메트로 버스로 산타모니카까지 간 뒤 534번","e":1},{"km":"31km","w":"—","c":"46–58분","f":"33분","t":"사실상 불가","td":"해변까지 정기 노선이 없습니다. 차량 호출 약 $50–80","e":1},{"km":"50km","w":"—","c":"1시간 9분–1시간 23분","f":"49분","t":"사실상 불가","td":"차량 호출 약 $70–110","e":1}],"e2":[{"km":"18km","w":"—","c":"38–48분","f":"27분","t":"약 55–70분","td":"메트로 E라인 → B라인 Universal City역","e":1},{"km":"19km","w":"—","c":"38–48분","f":"27분","t":"약 55–70분","td":"메트로 B라인 → E라인","e":1}],"e3":[{"km":"16km","w":"—","c":"22–31분","f":"16분","t":"약 35–45분","td":"메트로 E라인 7th St/Metro Center역 하차 후 도보","e":1},{"km":"0.7km","w":"약 8분","c":"7–8분","f":"2분","wr":1,"t":"걸어서 이동","td":"언덕길입니다. 엔젤스 플라이트 케이블카도 있습니다","e":1},{"km":"3km","w":"약 35분","c":"10–13분","f":"5분","t":"약 25–35분","td":"DASH 버스 또는 메트로 A라인","e":1},{"km":"1.5km","w":"약 20분","c":"8–10분","f":"3분","wr":1,"t":"걸어서 이동 / A라인 1정거장","td":"","e":1}],"ef":[{"km":"11km","w":"—","c":"18–26분","f":"13분","t":"약 50–70분","td":"메트로 E·C라인 + LAX 셔틀. 이른 아침에 짐이 많으면 비추천","e":1}],"efs":[{"km":"7.1km","w":"—","c":"13–18분","f":"8분","t":"약 30–45분","td":"버스·셔틀 환승","e":1}],"s1":[{"km":"38km","w":"—","c":"46–58분","f":"33분","t":"약 1시간 40분–2시간 30분","td":"OCTA 버스 환승","e":1},{"km":"103km","w":"—","c":"1시간 43분–1시간 57분","f":"1시간 30분","t":"약 3시간–3시간 30분","td":"암트랙 퍼시픽 서프라이너 + 버스 환승","e":1},{"km":"30km","w":"—","c":"43–55분","f":"31분","t":"약 1시간 15분–1시간 40분","td":"MTS 버스 환승","e":1},{"km":"9.1km","w":"—","c":"17–24분","f":"12분","t":"약 25–35분","td":"MTS 버스 또는 페리","e":1}],"s2":[{"km":"5km","w":"—","c":"11–15분","f":"6분","t":"약 20–30분","td":"MTS 버스","e":1},{"km":"10km","w":"—","c":"16–23분","f":"11분","t":"약 35–50분","td":"MTS 버스 또는 페리","e":1},{"km":"20km","w":"—","c":"32–42분","f":"23분","t":"약 1시간 10분–1시간 30분","td":"버스 환승","e":1}],"s3":[{"km":"42km","w":"—","c":"49분–1시간 1분","f":"35분","t":"약 50–65분","td":"코스터 열차","e":1},{"km":"99km","w":"—","c":"1시간 51분–2시간 11분","f":"1시간 19분","t":"약 2시간 30분–3시간","td":"열차·버스 환승","e":1},{"km":"68km","w":"—","c":"1시간 17분–1시간 33분","f":"55분","t":"약 2시간 30분–3시간 30분","td":"버스·메트로링크 환승","e":1},{"km":"5.2km","w":"—","c":"12–16분","f":"7분","t":"약 25–40분","td":"버스","e":1}]};
+function legBox(key,ix,s){
+  const L=LEGS[key]&&LEGS[key][ix];
+  if(!L)return s.leg?'<span class="leg">'+s.leg+'</span>':'';
+  return '<div class="lb"><div class="lbh"><b>↓ '+L.km+'</b>'+(L.wr?'<span class="wr">걸어서 이동 추천</span>':'')+'</div>'
+   +'<div class="lbg"><div><small>도보</small><b>'+L.w+'</b></div>'
+   +'<div><small>차량</small><b>'+L.c+'</b>'+(L.f?'<em>막히지 않으면 '+L.f+'</em>':'')+'</div>'
+   +'<div><small>대중교통'+(L.e?'<span class="est">추정</span>':'')+'</small><b>'+L.t+'</b></div></div>'
+   +(L.td?'<div class="lbd">'+L.td+'</div>':'')+'</div>';
+}
+function legSum(key,ix,s){
+  const L=LEGS[key]&&LEGS[key][ix];
+  if(!L)return s.leg?'<br><small>다음 구간 ↓ '+s.leg+'</small>':'';
+  return '<br><small>다음 구간 ↓ '+L.km+' · 도보 '+L.w+' · 차 '+L.c+' · 대중교통 '+L.t+(L.e?' (추정)':'')+'</small>';
+}
 function dayCard(day){
   const url=mapsUrl(day.stops), key=day.g||day.id.replace(/[ABC]$/,'');
-  const stops=day.stops.map(s=>'<li><span class="tm">'+s.tm+'</span><span class="nm">'+s.nm+'</span>'
-    +(s.nt?'<span class="nt">'+s.nt+'</span>':'')+(s.leg?'<span class="leg">'+s.leg+'</span>':'')+'</li>').join('');
+  const stops=day.stops.map((s,ix)=>'<li><span class="tm">'+s.tm+'</span><span class="nm">'+s.nm+'</span>'
+    +(s.nt?'<span class="nt">'+s.nt+'</span>':'')+legBox(key,ix,s)+'</li>').join('');
   const [dm,dd]=day.d.split('/');
   return '<article class="day'+(day.type==='ext'?' ext':'')+'" id="'+day.id+'" style="--tc:'+varOf(day.type)+'">'
    +'<div class="dh"><div><div class="dd">'+day.d+'<small>('+day.w+')</small></div><h3>'+day.t+'</h3></div>'
@@ -656,7 +681,7 @@ const GEO={"d1":{"p":[[33.9416,-118.4085],[34.0618,-118.3007],[34.0634,-118.299]
       g.g.forEach(l=>l.forEach(p=>bounds.push(p)));
       g.p.forEach((p,i)=>{const s=d.stops[i]||{};
         L.marker(p,{icon:L.divIcon({className:'',html:'<div class="pin" style="background:'+col+';color:'+textOn(col)+'">'+(i+1)+'</div>',iconSize:[26,26],iconAnchor:[13,13]}),zIndexOffset:500+i})
-          .bindPopup('<b>'+(s.tm||'')+' '+(s.nm||'')+'</b>'+(s.nt?'<br>'+s.nt:'')+(s.leg?'<br><small>다음 구간 ↓ '+s.leg+'</small>':'')).addTo(group);
+          .bindPopup('<b>'+(s.tm||'')+' '+(s.nm||'')+'</b>'+(s.nt?'<br>'+s.nt:'')+legSum(key,i,s)).addTo(group);
         bounds.push(p);});
       (g.b||[]).forEach(b=>{
         L.marker([b.lat,b.lon],{icon:L.divIcon({className:'',html:'<div class="bpin"></div>',iconSize:[16,16],iconAnchor:[8,8]})})
