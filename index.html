@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<title>LA·캐니언 여행 플랜</title>
+<style>
+:root{
+  --bg:#f5f4ef; --surface:#ffffff; --surface2:#faf9f5; --ink:#1d1c19; --muted:#6a675f; --line:#e3e0d6;
+  --c-fly:#4f46e5; --c-la:#0f766e; --c-drive:#b45309; --c-tour:#be185d; --c-park:#7c3aed; --c-ext:#15803d;
+  --warn-bg:#fff6dc; --warn-line:#ecd48a; --ocean:#dbe9f3; --land:#efece3; --water:#c9dff0;
+  --shadow:0 1px 2px rgba(30,28,20,.06),0 4px 14px rgba(30,28,20,.05);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141310; --surface:#1d1c18; --surface2:#23221d; --ink:#efede6; --muted:#a29f95; --line:#35332c;
+    --c-fly:#9a94ff; --c-la:#2dd4bf; --c-drive:#fbbf24; --c-tour:#f472b6; --c-park:#b49bff; --c-ext:#4ade80;
+    --warn-bg:#2b2511; --warn-line:#5b4e1d; --ocean:#1b2a36; --land:#232119; --water:#1f3a52;
+    --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141310; --surface:#1d1c18; --surface2:#23221d; --ink:#efede6; --muted:#a29f95; --line:#35332c;
+  --c-fly:#9a94ff; --c-la:#2dd4bf; --c-drive:#fbbf24; --c-tour:#f472b6; --c-park:#b49bff; --c-ext:#4ade80;
+  --warn-bg:#2b2511; --warn-line:#5b4e1d; --ocean:#1b2a36; --land:#232119; --water:#1f3a52; --shadow:none;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;
+  font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+h1,h2,h3,h4{line-height:1.25;margin:0}
+h2{font-size:1.5rem;letter-spacing:-.01em}
+h3{font-size:1.1rem}
+p{margin:0}
+.sub{color:var(--muted);margin-top:6px;font-size:.95rem}
+section{padding:44px 0 8px;scroll-margin-top:56px}
+.sec-head{margin-bottom:18px}
+
+/* hero */
+.hero{padding-top:40px;padding-bottom:8px}
+.eyebrow{color:var(--muted);font-size:.9rem}
+.hero h1{font-size:clamp(1.9rem,5vw,2.8rem);letter-spacing:-.02em;margin:6px 0 10px}
+.lede{max-width:62ch;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-top:22px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow)}
+.stat b{display:block;font-size:1.55rem;letter-spacing:-.02em;line-height:1.2}
+.stat span{color:var(--muted);font-size:.85rem}
+
+/* nav */
+nav.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line);margin-top:22px}
+nav.top .wrap{display:flex;gap:6px;overflow-x:auto;padding-top:9px;padding-bottom:9px;scrollbar-width:none}
+nav.top a{white-space:nowrap;text-decoration:none;font-size:.9rem;padding:6px 12px;border-radius:999px;color:var(--muted);border:1px solid transparent}
+nav.top a:hover,nav.top a.on{color:var(--ink);background:var(--surface);border-color:var(--line)}
+
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.tile{display:block;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--tc);
+  border-radius:12px;padding:10px 12px 12px;box-shadow:var(--shadow);transition:transform .12s}
+.tile:hover{transform:translateY(-2px)}
+.tile .d{font-weight:700;font-size:1.05rem}
+.tile .d small{font-weight:500;color:var(--muted);margin-left:4px}
+.tile .t{font-size:.88rem;margin:2px 0 6px;min-height:2.6em;line-height:1.35}
+.tile .s{font-size:.78rem;color:var(--muted)}
+.tag{display:inline-block;font-size:.72rem;font-weight:600;padding:1px 8px;border-radius:999px;
+  color:var(--tc);background:color-mix(in srgb,var(--tc) 14%,transparent)}
+.carbar{margin-top:18px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow)}
+.carbar h3{font-size:.95rem;margin-bottom:10px}
+.cb{display:grid;grid-template-columns:repeat(9,1fr);gap:4px}
+.cb div{height:26px;border-radius:6px;background:var(--c-la)}
+.cb div.idle{background:repeating-linear-gradient(45deg,transparent 0 5px,color-mix(in srgb,var(--muted) 45%,transparent) 5px 7px);
+  border:1px dashed var(--muted)}
+.cbl{display:grid;grid-template-columns:repeat(9,1fr);gap:4px;margin-top:4px;font-size:.72rem;color:var(--muted);text-align:center}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;font-size:.82rem;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:5px}
+.callout{background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:12px;padding:12px 14px;font-size:.92rem}
+.callout b{font-weight:700}
+.note-ext{margin-top:14px;border:1.5px dashed var(--c-ext);border-radius:12px;padding:12px 14px;font-size:.92rem;
+  background:color-mix(in srgb,var(--c-ext) 8%,transparent)}
+
+/* map */
+.mapbox{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px;box-shadow:var(--shadow)}
+.maptools{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.chip{font:inherit;font-size:.85rem;border:1px solid var(--line);background:var(--surface2);color:var(--ink);
+  padding:6px 12px;border-radius:999px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+svg.map{width:100%;height:auto;display:block;border-radius:10px}
+svg.map .ocean{fill:var(--water)}
+svg.map .land{fill:var(--land)}
+svg.map .border{fill:none;stroke:var(--muted);stroke-width:1;stroke-dasharray:4 4;opacity:.55}
+svg.map .rg{fill:var(--muted);font-size:13px;letter-spacing:.2em;opacity:.55}
+svg.map .halo{paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round}
+svg.map text{font-family:inherit}
+.maplegend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:10px;font-size:.82rem;color:var(--muted)}
+.maplegend i{display:inline-block;width:22px;height:0;border-top:4px solid;vertical-align:middle;margin-right:6px}
+
+/* day cards */
+.days{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:900px){.days{grid-template-columns:1fr 1fr}}
+.day{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--tc);border-radius:14px;
+  padding:16px 16px 14px;box-shadow:var(--shadow);scroll-margin-top:64px}
+.day.ext{border-style:dashed;border-left-style:solid}
+.dh{display:flex;gap:12px;align-items:flex-start;justify-content:space-between}
+.dh .dd{font-size:1.5rem;font-weight:800;line-height:1.1;letter-spacing:-.02em;color:var(--tc)}
+.dh .dd small{font-size:.85rem;font-weight:600;margin-left:3px}
+.dh h3{margin:4px 0 2px;font-size:1.08rem}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 4px}
+.pill{font-size:.76rem;padding:2px 9px;border-radius:999px;border:1px solid var(--line);background:var(--surface2);color:var(--muted)}
+.pill.car{color:var(--c-la);border-color:color-mix(in srgb,var(--c-la) 40%,var(--line))}
+.pill.idle{color:var(--muted);border-style:dashed}
+.tl{list-style:none;margin:12px 0 0;padding:0 0 0 18px;border-left:2px solid var(--line);position:relative}
+.tl li{position:relative;padding:0 0 10px 12px}
+.tl li::before{content:"";position:absolute;left:-26px;top:7px;width:10px;height:10px;border-radius:50%;
+  background:var(--surface);border:2.5px solid var(--tc)}
+.tl .tm{font-variant-numeric:tabular-nums;font-weight:700;font-size:.82rem;color:var(--tc);margin-right:8px}
+.tl .nm{font-weight:600}
+.tl .nt{display:block;font-size:.85rem;color:var(--muted);margin-top:1px}
+.leg{display:block;width:fit-content;margin-top:5px;font-size:.76rem;color:var(--muted);background:var(--surface2);
+  border:1px solid var(--line);border-radius:6px;padding:1px 8px}
+.leg::before{content:"↓ "}
+.tip{margin-top:6px;font-size:.86rem;background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:10px;padding:8px 11px}
+.tip b{margin-right:4px}
+.spare{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:.8rem;color:var(--muted)}
+.spare span.sp{border:1.5px dashed var(--muted);border-radius:999px;padding:1px 10px}
+.maplink{display:inline-block;margin-top:10px;font-size:.82rem;color:var(--tc);text-decoration:none;font-weight:600}
+.maplink:hover{text-decoration:underline}
+
+/* candidates */
+.cands{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.cand{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow)}
+.cand h3{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.cand .stars{font-size:.8rem;color:var(--c-ext);white-space:nowrap}
+.cand p.d{font-size:.88rem;color:var(--muted);margin:6px 0 10px}
+.meter{display:grid;grid-template-columns:64px 1fr;gap:4px 10px;font-size:.78rem;color:var(--muted);align-items:center}
+.meter .bar{display:flex;gap:3px}
+.meter .bar i{height:7px;flex:1;border-radius:3px;background:var(--line)}
+.meter .bar i.f{background:var(--c-ext)}
+.meter .bar.hot i.f{background:var(--c-drive)}
+.cand .car{margin-top:10px;font-size:.82rem;border-top:1px dashed var(--line);padding-top:8px}
+.skip{margin-top:14px;font-size:.9rem;color:var(--muted)}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 14px}
+.tabs button{font:inherit;text-align:left;cursor:pointer;background:var(--surface);color:var(--ink);border:1.5px solid var(--line);
+  border-radius:12px;padding:10px 14px;min-width:210px;flex:1}
+.tabs button small{display:block;color:var(--muted);font-size:.78rem}
+.tabs button[aria-selected="true"]{border-color:var(--c-ext);background:color-mix(in srgb,var(--c-ext) 10%,var(--surface))}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:0 0 14px}
+.kv div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.kv small{display:block;color:var(--muted);font-size:.76rem}
+.kv b{font-size:1.02rem}
+
+/* tables / grids */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow)}
+.tbl{width:100%;border-collapse:collapse;font-size:.9rem}
+.tbl th,.tbl td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl th{font-size:.78rem;color:var(--muted);font-weight:600;white-space:nowrap}
+.tbl tr.hl td{background:color-mix(in srgb,var(--c-ext) 9%,transparent)}
+.scroll{overflow-x:auto}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.vs{display:grid;grid-template-columns:90px 1fr;gap:6px 10px;align-items:center;font-size:.85rem}
+.vs .b{height:20px;border-radius:5px;background:var(--c-drive);color:#fff;font-size:.75rem;padding:0 8px;display:flex;align-items:center;white-space:nowrap}
+.vs .b.car{background:var(--c-la)}
+.chk{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.chk li{padding-left:26px;position:relative;font-size:.9rem}
+.chk li::before{content:"";position:absolute;left:0;top:4px;width:15px;height:15px;border:2px solid var(--c-la);border-radius:4px}
+.chk b{display:block}
+.chk span{color:var(--muted)}
+.steps{counter-reset:s;list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.steps li{counter-increment:s;padding-left:38px;position:relative;font-size:.92rem}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;
+  background:var(--ink);color:var(--bg);font-weight:700;font-size:.8rem;display:grid;place-items:center}
+.steps b{display:block}
+.steps span{color:var(--muted)}
+ul.plain{margin:6px 0 0;padding-left:18px;font-size:.9rem}
+ul.plain li{margin:4px 0}
+.ok::marker{content:"✔  "}
+.fix::marker{content:"△  "}
+.unk::marker{content:"?  "}
+footer{padding-top:36px;padding-bottom:60px;color:var(--muted);font-size:.82rem}
+footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header class="hero wrap">
+  <p class="eyebrow">2027.7.16(금) – 7.24(토) · 4명 · 렌터카 · 에어프레미아 직항 (LAX 인·아웃)</p>
+  <h1>LA · 캐니언 여행 플랜</h1>
+  <p class="lede">초안 일정을 한 화면에서 훑어볼 수 있게 다시 정리하고, 귀국을 2–3일 늦출 때의 연장 코스와 렌터카 운영안을 더했습니다. 원본 파일은 그대로 두었습니다.</p>
+  <div class="stats">
+    <div class="stat"><b>8박 9일</b><span>연장하면 10박 11일 · 11박 12일</span></div>
+    <div class="stat"><b>약 1,040km</b><span>자가 운전 합계 (초안 구간 합산)</span></div>
+    <div class="stat"><b>약 1,150km</b><span>캐니언 투어 버스 (2일, 차는 주차)</span></div>
+    <div class="stat"><b>8일 중 3일</b><span>렌터카가 주차장에 서 있는 날</span></div>
+  </div>
+</header>
+
+<nav class="top"><div class="wrap">
+  <a href="#overview">한눈에</a><a href="#map">루트 지도</a><a href="#days">날짜별 일정</a>
+  <a href="#extend">2–3일 더 있다면</a><a href="#car">렌터카</a><a href="#budget">비용</a><a href="#check">확인할 것</a>
+</div></nav>
+
+<main class="wrap">
+
+<section id="overview">
+  <div class="sec-head"><h2>한눈에 보기</h2>
+  <p class="sub">타일을 누르면 그날 일정으로 이동합니다. 색은 하루의 성격입니다.</p></div>
+  <div id="tiles" class="tiles"></div>
+  <div class="carbar">
+    <h3>렌터카는 언제 움직이나</h3>
+    <div class="cb" id="cb"></div>
+    <div class="cbl" id="cbl"></div>
+    <div class="legend"><span><i style="background:var(--c-la)"></i>운전하는 날</span><span><i style="background:repeating-linear-gradient(45deg,transparent 0 3px,var(--muted) 3px 4px);border:1px dashed var(--muted)"></i>주차장에 서 있는 날</span></div>
+    <p class="callout" style="margin-top:12px">7/20·7/21은 캐니언 투어 버스, 7/23은 디즈니랜드(호텔에서 도보)라 <b>차를 쓰지 않습니다.</b> 일 $140–220 기준 약 <b>$420–660</b>가 주차장에서 보내는 렌트비입니다. 분할 렌트로 줄이는 방법은 <a href="#car">렌터카</a> 항목에 정리했습니다.</p>
+  </div>
+  <div class="note-ext">귀국을 늦추면 7/24 이후가 <b>연장 일정(초록 점선)</b>으로 바뀌고, 7/24 새벽 6시 출발 부담도 사라집니다 → <a href="#extend"><b>연장 코스 보기</b></a></div>
+</section>
+
+<section id="map">
+  <div class="sec-head"><h2>루트 지도</h2>
+  <p class="sub">축척을 맞춘 개략도입니다. 실제 도로 경로는 날짜별 카드의 “구글 지도” 링크로 확인하세요. 원본 초안의 상세 지도도 그대로 쓸 수 있습니다.</p></div>
+  <div class="mapbox">
+    <div class="maptools" role="group" aria-label="지도 레이어">
+      <button class="chip" data-layer="la" aria-pressed="false">+ 연장: LA 올인</button>
+      <button class="chip" data-layer="sd" aria-pressed="false">+ 연장: 샌디에이고</button>
+    </div>
+    <svg id="mapsvg" class="map" viewBox="0 0 900 600" role="img" aria-label="LA·라스베이거스·페이지 루트 개략도"></svg>
+    <div class="maplegend">
+      <span><i style="border-color:var(--c-drive)"></i>7/19 · 7/22 장거리 운전</span>
+      <span><i style="border-color:var(--c-tour)"></i>7/20–21 캐니언 투어 버스</span>
+      <span><i style="border-color:var(--c-ext);border-top-style:dashed"></i>연장 코스</span>
+    </div>
+  </div>
+</section>
+
+<section id="days">
+  <div class="sec-head"><h2>날짜별 일정</h2>
+  <p class="sub">각 구간의 소요 시간은 초안의 “보통(교통 반영)” 값입니다. 점선 칩은 시간이 남을 때 가는 예비 일정입니다.</p></div>
+  <div class="callout" style="margin-bottom:16px"><b>초안과 다르게 보정한 시간 3곳</b> (이 페이지에서만 조정, 원본은 그대로)
+    <ul class="plain">
+      <li><b>7/20 앤텔로프 도착</b> 10:30 → 약 12:30. 05:30 출발에 버스 이동 6시간 57분을 더하면 그렇습니다. 입장 슬롯은 투어사에 확인하세요.</li>
+      <li><b>7/21 데저트 뷰</b> 09:00 → 약 09:45. 07:00 출발에 2시간 46분이 걸립니다. 이후 시각도 45분쯤 밀립니다.</li>
+      <li><b>7/22 베가스 출발</b> 10:00 → 08:30. 10시 출발이면 애너하임 도착이 17시 전후이고 91번 퇴근 정체와 겹칩니다. 08:30 출발이 초안의 15:30 체크인과 맞습니다.</li>
+    </ul></div>
+  <div id="daycards" class="days"></div>
+</section>
+
+<section id="extend">
+  <div class="sec-head"><h2>2–3일 더 있다면</h2>
+  <p class="sub">디즈니랜드 다음 날(7/24) 출국하던 일정을 7/26(월) 또는 7/27(화)로 늦추는 경우입니다. 모든 코스는 LAX로 돌아오는 루프라 렌터카 편도 반납료가 생기지 않습니다.</p></div>
+
+  <div class="grid2" style="margin-bottom:18px">
+    <div class="card"><h3>먼저 정할 것 3가지</h3>
+      <ol class="steps" style="margin-top:12px">
+        <li><b>귀국편을 바꿀 수 있나</b><span>에어프레미아는 시즌마다 편명·시각을 조정합니다. 2027년 7월 스케줄과 변경 수수료·운임 차액부터 확인하세요.</span></li>
+        <li><b>쉬고 싶나, 더 보고 싶나</b><span>8일을 달린 뒤라 체력 배분이 관건입니다. 호텔을 덜 옮기는 코스가 편합니다.</span></li>
+        <li><b>예산 여유</b><span>하루에 1인 $130–280쯤 더 듭니다(렌트·숙박·입장권, 식비 제외). 아래 표 참고.</span></li>
+      </ol></div>
+    <div class="card"><h3>초안에서 빠졌던 곳과의 연결</h3>
+      <p class="sub" style="margin-bottom:8px">초안의 “이번 일정에서 빠진 곳”이 그대로 연장 후보입니다.</p>
+      <ul class="plain">
+        <li>유니버설 스튜디오 → 코스 A·B에 포함</li>
+        <li>비벌리힐스·다운타운 → 코스 A·B에 포함</li>
+        <li>게티 센터는 2027.3.15부터 휴관 → <b>게티 빌라</b>로 대체 (운영 지속)</li>
+        <li>샌프란시스코는 3일로는 이동만 하다 끝나서 제외 (4–5일 이상일 때)</li>
+      </ul></div>
+  </div>
+
+  <h3 style="margin:8px 0 12px">후보지 한눈에 비교</h3>
+  <div id="cands" class="cands"></div>
+  <p class="skip"><b>제외 추천:</b> 팜스프링스·조슈아 트리·데스밸리는 7월 낮 40–50°C라 체력 소모가 큽니다. 요세미티·빅서는 거리가 멀고 일정이 부족합니다.</p>
+
+  <div class="tabs" role="tablist" id="pkgtabs"></div>
+  <div id="pkgbody"></div>
+</section>
+
+<section id="car">
+  <div class="sec-head"><h2>렌터카</h2>
+  <p class="sub">연장 여부와 상관없이 차를 어떻게 굴릴지 정리했습니다. 단가는 2027년 실제 견적이 아니라 초안의 비교용 가정입니다.</p></div>
+
+  <div class="callout" style="margin-bottom:16px">
+    <b>결론:</b> LAX 픽업–LAX 반납 <b>한 대로 통째 렌트</b>를 유지하고, 연장하는 날만큼 반납일을 늦추세요. 연장 1일당 렌트와 주유·주차를 합쳐 약 <b>$150–230</b>가 더 듭니다. 반납일이 바뀌면 일 단위 요율이 달라질 수 있어, 귀국편 변경이 확정된 뒤 예약하거나 <b>무료 취소 요금</b>으로 먼저 잡아 두는 편이 안전합니다.
+  </div>
+
+  <div class="grid2">
+    <div class="card"><h3>운영안 비교 (렌트비만, 일 $140–220 가정)</h3>
+      <div class="scroll"><table class="tbl" style="margin-top:8px">
+        <thead><tr><th>운영안</th><th>기본</th><th>+2일</th><th>+3일</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td><b>① LAX 7/16부터 통째</b><br><small>초안 A안 · 추천</small></td><td>8일<br>$1,120–1,760</td><td>10일<br>$1,400–2,200</td><td>11일<br>$1,540–2,420</td></tr>
+          <tr><td><b>② 7/19부터 렌트</b><br><small>초안 B안 · LA 3일은 대중교통</small></td><td>5일<br>$700–1,100<br>+편도 반납료</td><td>7일<br>$980–1,540</td><td>8일<br>$1,120–1,760</td></tr>
+          <tr><td><b>③ 분할 렌트</b><br><small>베가스에서 반납·재렌트</small></td><td colspan="3">주차장에 서 있는 3일치 ($420–660)와 베가스 주차료는 줄지만, 편도 반납료 2번과 픽업 수속이 한 번 더 생깁니다. 견적 두 번 받아 비교한 뒤 결정하세요.</td></tr>
+        </tbody></table></div>
+      <p class="sub" style="margin-top:8px">②는 연장 코스 A·B(LA 올인)와 맞지 않습니다. 연장일에는 차가 꼭 필요하니 ①이 자연스럽습니다.</p>
+    </div>
+    <div class="card"><h3>왜 7/16부터 차가 필요한가 (초안 비교)</h3>
+      <div class="vs" style="margin-top:12px">
+        <div>7/17 대중교통</div><div class="b" style="width:100%">약 4시간 (이동만)</div>
+        <div>7/17 자동차</div><div class="b car" style="width:38%">약 1시간 30분</div>
+        <div>7/18 대중교통</div><div class="b" style="width:38%">약 1시간 30분</div>
+        <div>7/18 자동차</div><div class="b car" style="width:18%">30–50분</div>
+      </div>
+      <p class="sub" style="margin-top:10px">7/17은 멜로즈→파머스 마켓→할리우드→그리피스를 도는 날이고, 7/18은 산타모니카→다저 스타디움입니다. 차량 호출로 대신하면 7/16–18에 $350–500이 듭니다(초안 가정).</p>
+    </div>
+  </div>
+
+  <h3 style="margin:26px 0 12px">차종은 이 급으로</h3>
+  <div class="card scroll"><table class="tbl">
+    <thead><tr><th>차급</th><th>4명 + 큰 캐리어 4개</th><th>메모</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><b>미니밴</b> (팩시피카·시에나급)</td><td>여유</td><td>슬라이딩 도어라 좁은 주차장에서 편하고, 하이브리드 모델이면 연비가 좋습니다. 가장 무난합니다.</td></tr>
+      <tr><td><b>풀사이즈 SUV</b> (타호·서버번급)</td><td>여유</td><td>장거리 안정감은 좋지만 연비와 가격이 불리합니다.</td></tr>
+      <tr><td><b>중형 SUV</b> (RAV4·CR-V급)</td><td>빠듯함</td><td>사람 4명이면 짐칸이 모자랍니다. 비추천.</td></tr>
+    </tbody></table></div>
+
+  <h3 style="margin:26px 0 12px">예약·운전 체크리스트</h3>
+  <div class="grid2">
+    <div class="card"><ul class="chk">
+      <li><b>서류</b><span>한국 운전면허 원본 + 국제운전면허증(IDP) + 여권. 보증금 승인이 되는 운전자 본인 신용카드. 캘리포니아 방문자 규정은 출국 전에 DMV나 대사관에서 한 번 더 확인하세요.</span></li>
+      <li><b>운전자 2명 이상 등록</b><span>7/19 435km, 7/22 약 420km처럼 긴 날은 교대해야 합니다. 추가 운전자 요금은 업체마다 다릅니다.</span></li>
+      <li><b>보험</b><span>렌터카 기본 배상 한도는 주 최소 수준일 수 있습니다. 한국 자동차보험·신용카드 혜택이 미국 렌트에 적용되는지 확인하고, 부족하면 추가 배상보험(SLI)을 검토하세요.</span></li>
+      <li><b>연료</b><span>Full-to-Full로 받고 반납하세요. 반납 전 공항 근처 주유소를 지도에 저장해 두세요.</span></li>
+    </ul></div>
+    <div class="card"><ul class="chk">
+      <li><b>도착일 픽업</b><span>17:20 도착 → 입국 후 19:00쯤 픽업. 예약에 도착 항공편 번호를 적으면 연착돼도 예약이 유지됩니다.</span></li>
+      <li><b>주차료</b><span>스트립 호텔 대부분은 유료 주차이고 리조트 요금도 따로 붙습니다. 베가스에 차를 3박 두니 주차 조건을 보고 호텔을 고르세요. 애너하임 호텔도 확인하세요.</span></li>
+      <li><b>사막 구간 (7/19·7/22)</b><span>낮 40°C 이상. 물을 넉넉히 싣고 연료는 절반 아래로 내리지 마세요. 바스토우에서 주유합니다.</span></li>
+      <li><b>유료 차선·도난</b><span>구글 지도에서 “유료 도로 피하기”를 켜세요. 차 안에 짐과 귀중품을 보이게 두지 마세요(할리우드·산타모니카 주차장 차량 털이).</span></li>
+      <li><b>이민 검문소 (샌디에이고 코스)</b><span>북행 I-5 샌클레멘테 부근에 검문소가 있습니다. 여권을 휴대하세요.</span></li>
+    </ul></div>
+  </div>
+</section>
+
+<section id="budget">
+  <div class="sec-head"><h2>연장 비용 가늠</h2>
+  <p class="sub">4명, 객실 2개 기준 추가분입니다. 항공 변경비와 식비는 빠져 있고 모두 비교용 추정입니다.</p></div>
+  <div class="card scroll"><table class="tbl">
+    <thead><tr><th>항목</th><th>A · +2일 (LA 압축)</th><th>B · +3일 (LA 올인)</th><th>C · +3일 (샌디에이고)</th></tr></thead>
+    <tbody>
+      <tr><td>렌트 (일 $140–220)</td><td>$280–440</td><td>$420–660</td><td>$420–660</td></tr>
+      <tr><td>호텔 (객실 2개, 박당 $180–300)</td><td>$720–1,200</td><td>$1,080–1,800</td><td>$1,080–1,800</td></tr>
+      <tr><td>입장권</td><td>유니버설 $436–616</td><td>유니버설 $436–616</td><td>동물원·박물관 선택 시 $150–300</td></tr>
+      <tr><td>주유 + 주차</td><td>$100–190</td><td>$140–260</td><td>$130–270</td></tr>
+      <tr class="hl"><td><b>합계</b></td><td><b>$1,540–2,450</b></td><td><b>$2,100–3,300</b></td><td><b>$1,900–3,330</b></td></tr>
+      <tr><td><b>1인당</b></td><td><b>$390–610</b></td><td><b>$530–830</b></td><td><b>$480–830</b></td></tr>
+    </tbody></table></div>
+  <p class="sub" style="margin-top:8px">유니버설 입장권은 2026년 온라인 가격 기준 1인 약 $109–154(익스프레스는 약 $209–309)입니다. 2027년에는 더 오를 수 있습니다.</p>
+
+  <h3 style="margin:26px 0 12px">예약 순서 (오늘 2026.10.27 기준)</h3>
+  <div class="card"><ol class="steps">
+    <li><b>지금 – 11월 · 귀국편 변경 가능 여부와 운임 차액 확인</b><span>연장일을 확정해야 렌터카·호텔 날짜가 정해집니다.</span></li>
+    <li><b>연말까지 · 캐니언 투어 예약</b><span>7월 성수기에는 앤텔로프·그랜드캐니언 2일 투어가 먼저 마감되는 편입니다. 투어 순서와 비거주자 입장료 처리도 이때 확인하세요.</span></li>
+    <li><b>2027 초 · 렌터카·호텔을 무료 취소로 먼저 확보</b><span>가격이 내려가면 재예약합니다. 베가스·애너하임 호텔은 주차 조건을 보세요.</span></li>
+    <li><b>일정 공개 후 · 다저스·유니버설·게티 빌라 예약</b><span>다저스 경기 시각은 정해지면 티켓을 잡으세요. 게티 빌라는 시간 지정 예약이 필요합니다.</span></li>
+    <li><b>출발 1개월 전 · IDP 발급, ESTA·여권 유효기간 확인</b><span>체류일이 늘면 여권 유효기간과 숙소 예약 날짜도 같이 점검하세요.</span></li>
+  </ol></div>
+</section>
+
+<section id="check">
+  <div class="sec-head"><h2>확인한 것과 아직 모르는 것</h2></div>
+  <div class="grid2">
+    <div class="card"><h3>자료로 확인됨</h3>
+      <ul class="plain">
+        <li class="ok"><a href="https://www.mlb.com/dodgers/news/dodgers-announce-2027-schedule">다저스 2027 일정</a>에서 다저스–에인절스 시리즈가 <b>7/16–18 다저 스타디움</b>입니다. 다만 잠정 일정이라 노사협약(CBA) 결과에 따라 바뀔 수 있고, 경기 시각은 미정입니다.</li>
+        <li class="ok"><a href="https://www.getty.edu/news/getty-announces-major-modernization-efforts/">게티 센터</a>는 2027.3.15부터 2028년 봄까지 휴관하고, 게티 빌라는 계속 운영합니다.</li>
+        <li class="ok"><a href="https://www.airpremia.com/a/ko/customer/notice/652">에어프레미아 공지</a>에 2026 하계 YP102는 10:50 출발로 표기되어 있습니다. 편명·시각은 시즌마다 바뀌는 사례가 있습니다.</li>
+        <li class="ok">렌터카 기본 배상 한도가 낮을 수 있어 SLI를 검토하라는 설명은 <a href="https://www.rentalcover.com/en/site/contact/66">렌탈커버 안내</a>를 참고했습니다.</li>
+      </ul></div>
+    <div class="card"><h3>아직 모르는 값</h3>
+      <ul class="plain">
+        <li class="unk">2027년 7월 YP102의 요일별 운항과 변경 수수료</li>
+        <li class="unk">렌터카 실제 요금, 편도 반납료, 호텔 주차료·객실 요금 (이 페이지는 가정치)</li>
+        <li class="unk">다저스–에인절스 7/18 경기 시작 시각</li>
+        <li class="unk">캐니언 투어 업체별 순서와 시각, 비거주자 입장료 처리 방식</li>
+        <li class="unk">IDP와 한국 면허 조합의 캘리포니아 현행 인정 범위 (DMV·대사관 확인 권장)</li>
+        <li class="unk">연장 코스의 구간 시간은 일반적인 도로 사정 기준 추정이라 구글 지도 링크로 재확인하세요.</li>
+      </ul></div>
+  </div>
+</section>
+
+</main>
+<footer class="wrap">
+  <p>초안 원본: LA-캐니언-여행-초안.html · 이 페이지는 2026.10.27 기준으로 작성했고, 거리·시간·가격은 추정치를 포함합니다. 출발 전 최신 정보를 확인하세요.</p>
+</footer>
+
+<script>
+const TYPES = {
+  fly:{n:'이동·항공',v:'--c-fly'}, la:{n:'LA 시내',v:'--c-la'}, drive:{n:'장거리 운전',v:'--c-drive'},
+  tour:{n:'캐니언 투어',v:'--c-tour'}, park:{n:'테마파크',v:'--c-park'}, ext:{n:'연장',v:'--c-ext'}
+};
+
+const DAYS = [
+ {id:'d1',d:'7/16',w:'금',t:'LA 도착',type:'fly',stay:'LA 한인타운',car:true,km:24,
+  stops:[
+   {tm:'17:20',nm:'LAX 도착 · 렌터카 픽업',nt:'입국 심사·짐 찾기 후 19:00쯤 픽업. 예약에 도착 항공편 번호를 적어 두세요.',leg:'24km · 보통 35–45분',q:'LAX Airport, Los Angeles'},
+   {tm:'19:45',nm:'한인타운 호텔 체크인',nt:'금요일 저녁 정체 시 405번 대신 라 시에네가 블러바드로 우회',leg:'도보 약 5분',q:'Koreatown, Los Angeles'},
+   {tm:'20:30',nm:'한인타운 저녁',nt:'늦게까지 하는 식당이 많습니다. 시차 적응을 위해 일찍 취침',q:'Koreatown, Los Angeles'}],
+  tip:'첫날은 이동과 저녁 식사만. 입국 1–2시간에 금요일 퇴근길 정체가 겹칩니다.',
+  spare:['코리아타운 스파(찜질방)','인앤아웃 LAX(비행기 스팟)']},
+
+ {id:'d2',d:'7/17',w:'토',t:'멜로즈 · 그리피스 야경',type:'la',stay:'LA 한인타운',car:true,km:34,
+  stops:[
+   {tm:'10:00',nm:'호텔 출발',leg:'9km · 18–26분',q:'Koreatown, Los Angeles'},
+   {tm:'10:30',nm:'멜로즈 플레이스',nt:'카페·편집숍 산책',leg:'도보 약 9분',q:'Melrose Place, West Hollywood'},
+   {tm:'11:30',nm:'폴 스미스 핑크 월 (멜로즈 애비뉴)',nt:'사진 명소. 이어서 페어팩스 쪽까지 쇼핑',leg:'2km · 9–11분',q:'Paul Smith Pink Wall, Los Angeles'},
+   {tm:'13:30',nm:'오리지널 파머스 마켓 · 더 그로브',nt:'점심 겸 쇼핑',leg:'6km · 14–19분',q:'The Original Farmers Market, Los Angeles'},
+   {tm:'16:00',nm:'할리우드 명예의 거리 · TCL 차이니즈 극장',nt:'1시간이면 충분',leg:'9km · 22–31분',q:'TCL Chinese Theatre, Hollywood'},
+   {tm:'18:30',nm:'그리피스 천문대',nt:'일몰부터 야경까지. 21시 전후 하산',leg:'약 9km · 22–31분',q:'Griffith Observatory'},
+   {tm:'21:30',nm:'호텔',q:'Koreatown, Los Angeles'}],
+  tip:'일몰은 20:05쯤. 토요일 저녁은 산 위 주차장이 일찍 차니 늦어도 19시 전에 도착하세요.',
+  spare:['레이크 할리우드 파크(할리우드 사인)','LACMA 어반 라이트','러니언 캐니언 아침 하이킹']},
+
+ {id:'d3',d:'7/18',w:'일',t:'산타모니카 · 다저스',type:'la',stay:'LA 한인타운',car:true,km:63,
+  stops:[
+   {tm:'07:45',nm:'호텔 출발',leg:'21km · 36–47분',q:'Koreatown, Los Angeles'},
+   {tm:'08:30',nm:'베니스 운하',nt:'아침이 조용하고 주차가 쉬움',leg:'도보 약 11분',q:'Venice Canals, Los Angeles'},
+   {tm:'09:15',nm:'베니스 비치 보드워크',nt:'머슬 비치, 스케이트 파크',leg:'4km · 12–16분',q:'Venice Beach Boardwalk'},
+   {tm:'10:00',nm:'산타모니카 해변 · 피어',nt:'Route 66 종점 표지판',leg:'30km · 41–51분',q:'Santa Monica Pier'},
+   {tm:'13:10',nm:'다저 스타디움',nt:'다저스 vs 에인절스 (프리웨이 시리즈)',leg:'8km · 20–27분',q:'Dodger Stadium'},
+   {tm:'17:00',nm:'호텔',nt:'경기 후 주차장 빠져나오는 데 30–60분',q:'Koreatown, Los Angeles'}],
+  tip:'MLB 잠정 일정으로는 프리웨이 시리즈가 7/16–18입니다. 시작 시각이 정해질 때까지 미정이니, 저녁 경기라면 산타모니카를 15–16시까지로 바꾸세요.',
+  spare:['애벗 키니 거리','서드 스트리트 프로머나드','엘 마타도르 비치(말리부)']},
+
+ {id:'d4',d:'7/19',w:'월',t:'라스베이거스로',type:'drive',stay:'라스베이거스 스트립',car:true,km:435,
+  stops:[
+   {tm:'08:00',nm:'한인타운 출발',nt:'10번 → 15번 프리웨이',leg:'183km · 2시간 33분–2시간 53분',q:'Koreatown, Los Angeles'},
+   {tm:'10:30',nm:'바스토우 휴게 · 아울렛',nt:'주유·점심',leg:'252km · 3시간 18분–3시간 44분',q:'Barstow Station, Barstow, CA'},
+   {tm:'15:00',nm:'스트립 호텔 체크인',nt:'다음 날 새벽 투어 픽업 장소 확인',leg:'도보 약 20분',q:'Las Vegas Strip, Las Vegas, NV'},
+   {tm:'19:00',nm:'벨라지오 분수 · 스트립 야경',nt:'다음 날 새벽 출발이니 일찍 쉬기',q:'Bellagio Fountains, Las Vegas'}],
+  tip:'사막 구간은 한낮 40°C를 넘습니다. 물을 넉넉히 싣고 주유는 바스토우에서. LA–베가스 고속철(브라이트라인 웨스트)은 2027년 7월에는 아직 운행하지 않을 가능성이 큽니다.',
+  spare:['세븐 매직 마운틴','캘리코 고스트타운','스피어 공연','벨라지오 ‘O’ 쇼']},
+
+ {id:'d5',d:'7/20',w:'화',t:'캐니언 투어 1일차',type:'tour',stay:'페이지 (투어 숙소)',car:false,km:0,
+  stops:[
+   {tm:'05:30',nm:'라스베이거스 호텔 픽업',nt:'투어 버스 탑승. 렌터카는 호텔 주차장에 두고 1박 짐만 챙기세요.',leg:'버스 459km · 약 6시간 57분',q:'Las Vegas Strip, Las Vegas, NV'},
+   {tm:'12:30',nm:'앤텔로프 캐니언 (보정: 초안 10:30)',nt:'나바호 현지 가이드 투어로만 입장. 투어 요금 포함 여부 확인',leg:'버스 20km · 약 1시간 6분',q:'Antelope Canyon, Page, AZ'},
+   {tm:'14:30',nm:'홀스슈 벤드',nt:'주차장에서 왕복 약 2km 도보. 그늘 없음',leg:'버스 9km · 약 20분',q:'Horseshoe Bend, Page, AZ'},
+   {tm:'17:00',nm:'페이지 숙소',q:'Page, AZ'}],
+  tip:'자이언·브라이스 일부를 들르는 상품도 있어 순서는 업체마다 다릅니다.',
+  spare:['레이크 파월 일몰(와윕 전망대)','글렌캐니언 댐 전망대']},
+
+ {id:'d6',d:'7/21',w:'수',t:'캐니언 투어 2일차',type:'tour',stay:'라스베이거스 스트립',car:false,km:0,
+  stops:[
+   {tm:'07:00',nm:'페이지 출발',leg:'버스 184km · 약 2시간 46분',q:'Page, AZ'},
+   {tm:'09:45',nm:'데저트 뷰 전망대 (보정: 초안 09:00)',nt:'사우스림 동쪽 입구. 워치타워',leg:'버스 37km · 약 59분',q:'Desert View Watchtower, AZ'},
+   {tm:'11:15',nm:'매더 포인트 (그랜드캐니언 사우스림)',nt:'대표 전망대. 림 트레일 짧게 산책',leg:'버스 446km · 약 6시간 9분',q:'Mather Point, Grand Canyon, AZ'},
+   {tm:'20:30',nm:'라스베이거스 호텔 도착',nt:'투어 종료 시각은 늦어질 수 있음',q:'Las Vegas Strip, Las Vegas, NV'}],
+  tip:'7월 오후 사우스림은 뇌우가 자주 옵니다. 비거주자 추가 요금은 4명이면 비거주자 연간 패스 한 장($250)이 유리할 수 있다고 초안에 적혀 있으니 투어사에 처리 방식을 물어보세요.',
+  spare:['브라이트 엔젤 트레일 입구','프리몬트 스트리트(구시가지)']},
+
+ {id:'d7',d:'7/22',w:'목',t:'애너하임으로',type:'drive',stay:'애너하임',car:true,km:425,
+  stops:[
+   {tm:'08:30',nm:'라스베이거스 출발 (보정: 초안 10:00)',leg:'253km · 3시간 19분–3시간 45분',q:'Las Vegas Strip, Las Vegas, NV'},
+   {tm:'12:00',nm:'바스토우 점심 · 주유',nt:'LA를 거치지 않고 바로 애너하임으로 가서 1시간 이상 아낍니다.',leg:'약 170–200km · 2시간 21분–2시간 40분',q:'Barstow Station, Barstow, CA'},
+   {tm:'15:30',nm:'애너하임 호텔 체크인',nt:'디즈니랜드 도보권',leg:'3km · 11–15분 (도보 약 10분)',q:'Disneyland Resort, Anaheim, CA'},
+   {tm:'18:00',nm:'다운타운 디즈니 · 저녁',nt:'내일을 위해 가볍게',q:'Downtown Disney District, Anaheim'}],
+  tip:'목요일 오후 91번 프리웨이 정체를 피하려고 일찍 출발합니다. 렌터카는 애너하임 호텔에 두고 7/23은 걸어서 이동하세요.',
+  spare:['헌팅턴 비치 피어 일몰','후버댐']},
+
+ {id:'d8',d:'7/23',w:'금',t:'디즈니랜드',type:'park',stay:'애너하임',car:false,km:0,
+  stops:[
+   {tm:'07:30',nm:'디즈니랜드 개장 대기',nt:'인기 놀이기구부터',leg:'도보 약 3분',q:'Disneyland Park, Anaheim'},
+   {tm:'13:00',nm:'호텔에서 휴식',leg:'도보 약 3분',q:'Disneyland Resort, Anaheim, CA'},
+   {tm:'17:00',nm:'디즈니랜드 재입장 · 퍼레이드 · 불꽃놀이',nt:'22시 전후 숙소 복귀',q:'Disneyland Park, Anaheim'}],
+  tip:'귀국이 7/24 10:50이면 새벽 6시에 출발해야 하니 짐은 전날 밤에 미리 싸 두세요. 연장하면 이 부담이 없어집니다.',
+  spare:['디즈니 캘리포니아 어드벤처']},
+
+ {id:'d9',d:'7/24',w:'토',t:'출국 (YP102 10:50)',type:'fly',stay:'기내',car:true,km:55,
+  stops:[
+   {tm:'06:00',nm:'애너하임 호텔 출발',nt:'체크아웃은 전날 밤 미리(익스프레스). 아침은 공항에서',leg:'55km · 보통 1시간 4분–1시간 19분',q:'Disneyland Resort, Anaheim, CA'},
+   {tm:'07:05',nm:'LAX 렌터카 반납 → 셔틀로 터미널',nt:'반납 10–15분 + 셔틀 20–30분 → 07:50쯤 톰 브래들리 국제선 터미널 도착 → 10:50 출발',q:'LAX Rental Car Center, Los Angeles'}],
+  tip:'국제선은 출발 3시간 전 도착이 권장이라 애너하임에서 06:00 출발이 필요합니다. 반납 전 공항 근처에서 주유하세요.'}
+];
+
+const E_BH = {id:'e1',d:'7/24',w:'토',t:'비벌리힐스 · 게티 빌라 · 말리부',type:'ext',stay:'LA 서부 (컬버시티·엘세군도 권장)',car:true,km:130,
+  stops:[
+   {tm:'09:00',nm:'애너하임 호텔 출발',leg:'약 55km · 50–80분',q:'Disneyland Resort, Anaheim, CA'},
+   {tm:'10:30',nm:'비벌리힐스 · 로데오 드라이브',nt:'비벌리 가든스 파크 사인에서 사진. 주차 요금은 현장 확인',leg:'약 25km · 35–50분',q:'Rodeo Drive, Beverly Hills'},
+   {tm:'13:00',nm:'게티 빌라 (팔리세이즈)',nt:'무료, 시간 지정 예약 필수. 센터는 2027.3.15부터 휴관이라 빌라로 대체',leg:'약 30km · 35–50분',q:'Getty Villa, Pacific Palisades'},
+   {tm:'16:30',nm:'말리부 해변 (엘 마타도르 · 주마)',nt:'일몰 20:05쯤. PCH 주차 공간은 일찍 찹니다.',leg:'약 35km · 45–60분',q:'El Matador State Beach, Malibu'},
+   {tm:'20:30',nm:'호텔 (컬버시티·엘세군도 인근)',q:'Culver City, CA'}],
+  tip:'게티 빌라 예약이 필수입니다. 말리부 일몰까지 보면 호텔 도착이 21시 전후입니다.',
+  spare:['서드 스트리트 프로머나드','산타모니카 피어 야경']};
+
+const E_UNI = (dow,note)=>({id:'e2',d:dow==='일'?'7/25':'7/26',w:dow,t:'유니버설 스튜디오 할리우드',type:'ext',stay:'LA 서부 (같은 호텔)',car:true,km:60,
+  stops:[
+   {tm:'08:00',nm:'호텔 출발',leg:'약 25km · 30–50분',q:'Culver City, CA'},
+   {tm:'09:00',nm:'유니버설 스튜디오 입장',nt:'스튜디오 투어, 슈퍼 닌텐도 월드, 해리포터 월드, 워터월드 등. 개장 전 도착해 인기 놀이기구를 먼저 타세요.',leg:'약 25km · 30–50분',q:'Universal Studios Hollywood'},
+   {tm:'20:00',nm:'폐장 · 호텔 복귀',q:'Culver City, CA'}],
+  tip:note,
+  spare:['유니버설 시티워크 저녁','할리우드 사인 전망대']});
+
+const E_DT = {id:'e3',d:'7/25',w:'일',t:'다운타운 LA · 아트 디스트릭트',type:'ext',stay:'LA 서부 (같은 호텔)',car:true,km:55,
+  stops:[
+   {tm:'09:30',nm:'호텔 출발',leg:'약 22km · 30–50분',q:'Culver City, CA'},
+   {tm:'10:00',nm:'그랜드 센트럴 마켓',nt:'아침·브런치',leg:'도보 약 10분',q:'Grand Central Market, Los Angeles'},
+   {tm:'11:30',nm:'월트 디즈니 콘서트홀 · 더 브로드',nt:'더 브로드는 무료이며 예약을 권장합니다.',leg:'차 약 10–15분',q:'The Broad, Los Angeles'},
+   {tm:'14:00',nm:'아트 디스트릭트 벽화 · 점심',nt:'아라토 쪽 벽화 거리와 카페',leg:'차 약 10분',q:'Arts District, Los Angeles'},
+   {tm:'16:30',nm:'리틀 도쿄',nt:'일본 간식과 상점. 저녁은 한인타운으로 가도 좋습니다.',q:'Little Tokyo, Los Angeles'}],
+  tip:'일요일이라 주차는 비교적 수월합니다. 할리우드 볼 여름 시즌 공연이 있으면 저녁에 넣어 보세요(2027 시즌 공개 후 확인).',
+  spare:['할리우드 볼 공연','엔젤스 플라이트 케이블카']};
+
+const E_FLY = (d,w,note)=>({id:'ef',d,w,t:'귀국',type:'fly',stay:'기내',car:true,km:20,
+  stops:[
+   {tm:'06:30',nm:'호텔 출발 · 주유',leg:'약 15–25km · 20–40분',q:'Culver City, CA'},
+   {tm:'07:05',nm:'LAX 렌터카 반납 → 셔틀로 터미널',nt:'07:50쯤 국제선 터미널 도착 → 출발 3시간 전',q:'LAX Rental Car Center, Los Angeles'}],
+  tip:note});
+
+const E_SD1 = {id:'s1',d:'7/24',w:'토',t:'해안 드라이브 → 샌디에이고',type:'ext',stay:'샌디에이고 (코로나도·다운타운)',car:true,km:190,
+  stops:[
+   {tm:'09:30',nm:'애너하임 출발',leg:'약 45km · 50–80분',q:'Disneyland Resort, Anaheim, CA'},
+   {tm:'10:30',nm:'라구나 비치',nt:'헤이슬러 파크 전망대와 해변 산책',leg:'약 110km · 1시간 20분–1시간 50분',q:'Heisler Park, Laguna Beach'},
+   {tm:'13:30',nm:'라호야 코브',nt:'바다사자·해변. 점심',leg:'약 27km · 30–40분',q:'La Jolla Cove, San Diego'},
+   {tm:'16:30',nm:'코로나도 비치 · 호텔 델 코로나도',nt:'해변 산책, 일몰',leg:'차 약 10–20분',q:'Hotel del Coronado, Coronado'},
+   {tm:'19:30',nm:'시포트 빌리지 · 개스램프 저녁',q:'Seaport Village, San Diego'}],
+  tip:'해안도로(PCH)는 구간별로 느립니다. 시간이 급하면 I-5를 타세요.',
+  spare:['선셋 클리프스 일몰','올드타운']};
+
+const E_SD2 = {id:'s2',d:'7/25',w:'일',t:'샌디에이고 풀데이',type:'ext',stay:'샌디에이고 (같은 호텔)',car:true,km:40,
+  stops:[
+   {tm:'09:00',nm:'발보아 파크 또는 샌디에이고 동물원 (택1)',nt:'스페인풍 건축과 박물관 / 동물원',leg:'약 5km · 15분',q:'Balboa Park, San Diego'},
+   {tm:'13:00',nm:'리틀 이탈리아 점심',leg:'약 15km · 20–30분',q:'Little Italy, San Diego'},
+   {tm:'15:00',nm:'코로나도 해변 · 휴식',leg:'약 15km · 25분',q:'Coronado Beach'},
+   {tm:'19:30',nm:'선셋 클리프스 일몰',nt:'일몰 20:00쯤',q:'Sunset Cliffs Natural Park, San Diego'}],
+  tip:'체력이 남으면 레고랜드(칼스배드)는 다음 날 북상 길에 넣을 수 있습니다.',
+  spare:['레고랜드 캘리포니아','토레이 파인스 해안 산책']};
+
+const E_SD3 = {id:'s3',d:'7/26',w:'월',t:'북상 → LA 서부 해안',type:'ext',stay:'엘세군도 · LAX 인근',car:true,km:200,
+  stops:[
+   {tm:'09:00',nm:'샌디에이고 출발',leg:'약 40km · 40–60분',q:'San Diego, CA'},
+   {tm:'10:00',nm:'엔시니타스 · 칼스배드',nt:'서핑 비치와 마을 산책',leg:'약 105km · 1시간–1시간 40분',q:'Encinitas, CA'},
+   {tm:'13:00',nm:'뉴포트 비치 · 발보아 반도',nt:'점심, 페리',leg:'약 65km · 1시간–1시간 30분',q:'Balboa Peninsula, Newport Beach'},
+   {tm:'15:30',nm:'맨해튼 비치 · 허모사 비치',nt:'피어와 스트랜드 산책, 일몰 20:00쯤',leg:'약 10km · 15–25분',q:'Manhattan Beach Pier'},
+   {tm:'20:30',nm:'호텔 (엘세군도 · LAX 인근)',q:'El Segundo, CA'}],
+  tip:'북행 I-5 샌클레멘테 이민 검문소에서 여권을 보여 줄 수 있습니다. 유니버설을 넣고 싶으면 이 날 08:00에 출발해 오후 입장으로 바꾸세요.'};
+
+const PKGS = [
+ {key:'A',tab:'A · +2일 · 출국 7/26(월)',sub:'LA 못 간 곳 압축',
+  who:'호텔을 한 번만 옮기고 초안의 빠진 곳을 채우고 싶은 분',
+  kv:[['출국일','7/26(월)'],['렌트','10일'],['호텔 이동','1회'],['추가 예산 1인','$390–610']],
+  days:[E_BH,E_UNI('일','일요일이라 혼잡합니다. 개장 전 도착하고 날짜 변경 가능한 티켓을 고르세요.'),E_FLY('7/26','월','귀국편이 7/26에 운항하는지 먼저 확인하세요. 호텔을 LAX 가까이 잡으면 아침이 편합니다.')]},
+ {key:'B',tab:'B · +3일 · 출국 7/27(화)',sub:'LA 올인 (추천)',
+  who:'초안의 빠진 곳을 다 채우고 호텔 이동은 한 번으로 끝내고 싶은 분',
+  kv:[['출국일','7/27(화)'],['렌트','11일'],['호텔 이동','1회'],['추가 예산 1인','$530–830']],
+  days:[E_BH,E_DT,E_UNI('월','평일이라 일요일보다 한산한 편이지만 7월은 성수기입니다. 사전 구매를 권합니다.'),E_FLY('7/27','화','화요일 아침 405번 정체를 피하려고 호텔은 컬버시티·엘세군도 같은 LAX 인근을 권장합니다.')]},
+ {key:'C',tab:'C · +3일 · 출국 7/27(화)',sub:'샌디에이고 해안 (대안)',
+  who:'새로운 지역과 시원한 바다가 더 끌리는 분. 2일만 늘린다면 7/26 하루를 빼 압축하세요.',
+  kv:[['출국일','7/27(화)'],['렌트','11일'],['호텔 이동','2회'],['추가 예산 1인','$480–830']],
+  days:[E_SD1,E_SD2,E_SD3,E_FLY('7/27','화','화요일 아침 405번 정체를 피하려고 호텔은 엘세군도·LAX 인근을 권장합니다.')]}
+];
+
+const CANDS = [
+ {n:'샌디에이고 (라호야·코로나도)',stars:'추천 ★★★★',d:'해안 도시. 7월에도 22–26°C 안팎이라 사막 구간 뒤에 쉬어 가기 좋습니다.',
+  m:[['이동',2],['체력',2],['7월',1]],car:'애너하임에서 약 145km, 1시간 30분–2시간 30분. 왕복 루프라 반납료 없음.'},
+ {n:'유니버설 스튜디오 할리우드',stars:'추천 ★★★★',d:'초안에서 디즈니랜드와 맞바꾼 곳. 하루를 통째로 씁니다.',
+  m:[['이동',1],['체력',4],['7월',3]],car:'LA 서부 호텔에서 25km, 30–50분. 주차료는 별도.'},
+ {n:'비벌리힐스 · 게티 빌라 · 말리부',stars:'추천 ★★★★',d:'센터 휴관 때문에 게티는 빌라로. 해변 일몰까지 반나절~하루.',
+  m:[['이동',2],['체력',2],['7월',1]],car:'차 필수. 말리부 해안도로(PCH)는 주말 오후 정체.'},
+ {n:'다운타운 LA · 아트 디스트릭트',stars:'추천 ★★★',d:'시장·건축·벽화를 도는 도시 산책. 일요일에 비교적 한산합니다.',
+  m:[['이동',1],['체력',3],['7월',3]],car:'주차장에 세워 두고 걸어 다니기.'},
+ {n:'산타바바라 · 솔뱅',stars:'보통 ★★',d:'LA에서 약 140km. 하루에 다녀오기엔 왕복 이동이 깁니다.',
+  m:[['이동',4],['체력',3],['7월',2]],car:'왕복 약 5시간. 숙박해야 여유가 있어 3일엔 부담.'},
+ {n:'카탈리나 섬 (아발론)',stars:'보통 ★★',d:'롱비치·샌페드로에서 페리로 1시간 남짓. 하루 코스입니다.',
+  m:[['이동',3],['체력',2],['7월',4]],car:'항구 주차료가 들고 7월 페리는 예약이 필수입니다.'}
+];
+
+function varOf(t){return 'var('+TYPES[t].v+')'}
+function mapsUrl(stops){
+  const qs=stops.filter(s=>s.q).map(s=>s.q);
+  if(qs.length<2)return null;
+  const mid=qs.slice(1,-1).slice(0,9).join('|');
+  return 'https://www.google.com/maps/dir/?api=1&travelmode=driving&origin='+encodeURIComponent(qs[0])
+   +'&destination='+encodeURIComponent(qs[qs.length-1])+(mid?'&waypoints='+encodeURIComponent(mid):'');
+}
+function dayCard(day){
+  const url=mapsUrl(day.stops);
+  const stops=day.stops.map(s=>'<li><span class="tm">'+s.tm+'</span><span class="nm">'+s.nm+'</span>'
+    +(s.nt?'<span class="nt">'+s.nt+'</span>':'')+(s.leg?'<span class="leg">'+s.leg+'</span>':'')+'</li>').join('');
+  const [dm,dd]=day.d.split('/');
+  return '<article class="day'+(day.type==='ext'?' ext':'')+'" id="'+day.id+'" style="--tc:'+varOf(day.type)+'">'
+   +'<div class="dh"><div><div class="dd">'+day.d+'<small>('+day.w+')</small></div><h3>'+day.t+'</h3></div>'
+   +'<span class="tag">'+TYPES[day.type].n+'</span></div>'
+   +'<div class="meta"><span class="pill">숙박 · '+day.stay+'</span>'
+   +(day.car?'<span class="pill car">운전'+(day.km?' 약 '+day.km+'km':'')+'</span>':'<span class="pill idle">차 안 씀 (주차)</span>')+'</div>'
+   +'<ul class="tl">'+stops+'</ul>'
+   +(day.tip?'<div class="tip"><b>체크</b>'+day.tip+'</div>':'')
+   +(day.spare?'<div class="spare">예비 '+day.spare.map(x=>'<span class="sp">'+x+'</span>').join('')+'</div>':'')
+   +(url?'<a class="maplink" target="_blank" rel="noopener" href="'+url+'">구글 지도에서 경로 보기 →</a>':'')
+   +'</article>';
+}
+
+/* overview */
+document.getElementById('tiles').innerHTML=DAYS.map(d=>
+  '<a class="tile" href="#'+d.id+'" style="--tc:'+varOf(d.type)+'"><div class="d">'+d.d+'<small>('+d.w+')</small></div>'
+  +'<div class="t">'+d.t+'</div><span class="tag">'+TYPES[d.type].n+'</span><div class="s" style="margin-top:6px">'+d.stay+'</div></a>').join('');
+document.getElementById('cb').innerHTML=DAYS.map(d=>'<div class="'+(d.car?'':'idle')+'" title="'+d.d+'"></div>').join('');
+document.getElementById('cbl').innerHTML=DAYS.map(d=>'<span>'+d.d.replace('7/','')+'</span>').join('');
+document.getElementById('daycards').innerHTML=DAYS.map(dayCard).join('');
+
+/* candidates */
+document.getElementById('cands').innerHTML=CANDS.map(c=>
+  '<div class="cand"><h3><span>'+c.n+'</span><span class="stars">'+c.stars+'</span></h3><p class="d">'+c.d+'</p><div class="meter">'
+  +c.m.map(([k,v])=>'<span>'+k+(k==='7월'?' 더위':' 부담')+'</span><div class="bar'+(k==='7월'?' hot':'')+'">'
+    +[1,2,3,4,5].map(i=>'<i class="'+(i<=v?'f':'')+'"></i>').join('')+'</div>').join('')
+  +'</div><p class="car"><b>렌터카</b> · '+c.car+'</p></div>').join('');
+
+/* packages */
+const tabs=document.getElementById('pkgtabs'), body=document.getElementById('pkgbody');
+tabs.innerHTML=PKGS.map((p,i)=>'<button role="tab" data-i="'+i+'" aria-selected="'+(p.key==='B')+'">'+p.tab+'<small>'+p.sub+'</small></button>').join('');
+function showPkg(i){
+  const p=PKGS[i];
+  [...tabs.children].forEach((b,j)=>b.setAttribute('aria-selected',j===i));
+  body.innerHTML='<p class="sub" style="margin-bottom:12px">'+p.who+'</p>'
+   +'<div class="kv">'+p.kv.map(([k,v])=>'<div><small>'+k+'</small><b>'+v+'</b></div>').join('')+'</div>'
+   +'<div class="days">'+p.days.map(d=>dayCard(Object.assign({},d,{id:d.id+p.key}))).join('')+'</div>';
+}
+tabs.addEventListener('click',e=>{const b=e.target.closest('button');if(b)showPkg(+b.dataset.i)});
+showPkg(1);
+
+/* map */
+(function(){
+  const svg=document.getElementById('mapsvg');
+  const LON0=-119.9,LAT0=37.3,S=122,K=Math.cos(35*Math.PI/180);
+  const X=lon=>(lon-LON0)*K*S, Y=lat=>(LAT0-lat)*S;
+  const P=pts=>pts.map(p=>X(p[0]).toFixed(1)+','+Y(p[1]).toFixed(1)).join(' ');
+  const coast=[[-119.9,34.41],[-119.7,34.40],[-119.45,34.37],[-119.25,34.27],[-119.22,34.15],[-119.1,34.10],[-118.8,34.02],[-118.6,34.04],[-118.5,34.03],[-118.43,33.99],[-118.42,33.90],[-118.4,33.84],[-118.42,33.77],[-118.35,33.73],[-118.3,33.71],[-118.2,33.74],[-118.0,33.74],[-117.9,33.65],[-117.87,33.59],[-117.75,33.50],[-117.67,33.46],[-117.62,33.42],[-117.4,33.25],[-117.35,33.16],[-117.28,33.0],[-117.27,32.85],[-117.25,32.75],[-117.24,32.67],[-117.12,32.53],[-117.12,32.4]];
+  const ocean=[...coast,[-119.9,32.4]];
+  let h='';
+  h+='<rect width="900" height="600" class="land"/>';
+  h+='<polygon class="ocean" points="'+P(ocean)+'"/>';
+  // state borders
+  h+='<polyline class="border" points="'+P([[-117.31,37.0],[-114.63,35.0]])+'"/>';
+  h+='<polyline class="border" points="'+P([[-114.63,35.0],[-114.72,32.72]])+'"/>';
+  h+='<polyline class="border" points="'+P([[-114.63,35.0],[-114.74,36.02],[-114.05,36.2],[-114.05,37.0]])+'"/>';
+  h+='<polyline class="border" points="'+P([[-114.05,37.0],[-110.9,37.0]])+'"/>';
+  // lakes
+  h+='<polygon class="ocean" points="'+P([[-114.8,36.0],[-114.4,36.3],[-114.2,36.1],[-114.55,35.9]])+'"/>';
+  h+='<polygon class="ocean" points="'+P([[-111.6,36.95],[-111.2,37.15],[-110.95,37.25],[-111.3,36.97],[-111.5,36.88]])+'"/>';
+  [['태평양',-119.6,33.2],['캘리포니아',-117.6,35.7],['네바다',-115.4,36.9],['애리조나',-112.6,35.0],['유타',-111.4,37.15]].forEach(r=>{
+    h+='<text class="rg" x="'+X(r[1])+'" y="'+Y(r[2])+'" text-anchor="middle">'+r[0]+'</text>';});
+  const L=(pts,v,dash,w)=>'<polyline points="'+P(pts)+'" fill="none" stroke="var('+v+')" stroke-width="'+(w||4.5)+'" stroke-linecap="round" stroke-linejoin="round"'+(dash?' stroke-dasharray="9 8"':'')+'/>';
+  const LA=[-118.30,34.05],LAX=[-118.41,33.94],ANA=[-117.92,33.81],BAR=[-117.02,34.90],LV=[-115.17,36.11],PAGE=[-111.46,36.91],
+        GC=[-112.11,36.06],DV=[-111.83,36.04],KING=[-114.05,35.19],FLAG=[-111.65,35.20],SD=[-117.17,32.72],LJ=[-117.27,32.85];
+  // base routes
+  h+='<g id="base">';
+  h+=L([LA,[-117.6,34.06],[-117.45,34.31],[-117.29,34.54],BAR,[-116.07,35.26],[-115.38,35.61],LV],'--c-drive');
+  h+=L([LV,[-114.74,36.02],KING,FLAG,PAGE],'--c-tour');
+  h+=L([PAGE,[-111.41,35.88],DV,GC,[-112.19,35.25],KING,[-114.74,36.02],LV],'--c-tour',true);
+  h+=L([LV,BAR,[-117.40,33.95],ANA],'--c-drive',true,3.5);
+  h+='</g>';
+  // extensions
+  h+='<g id="ext-la" style="display:none"><ellipse cx="'+X(-118.42)+'" cy="'+Y(34.03)+'" rx="46" ry="30" fill="color-mix(in srgb,var(--c-ext) 16%,transparent)" stroke="var(--c-ext)" stroke-width="2.5" stroke-dasharray="6 5"/>'
+   +L([ANA,[-118.40,34.07],[-118.55,34.04],[-118.77,34.04],[-118.45,34.0]],'--c-ext',true,3.5)
+   +'<text class="halo" x="10" y="'+(Y(34.03)-52)+'" font-size="14" font-weight="700" fill="var(--c-ext)">비벌리힐스·게티빌라·말리부</text>'
+   +'<text class="halo" x="10" y="'+(Y(34.03)-35)+'" font-size="14" font-weight="700" fill="var(--c-ext)">다운타운·유니버설</text></g>';
+  h+='<g id="ext-sd" style="display:none">'
+   +L([ANA,[-117.75,33.50],[-117.4,33.25],LJ,SD],'--c-ext',true,4.5)
+   +L([SD,[-117.3,33.12],[-117.87,33.59],[-118.40,33.88]],'--c-ext',true,2.5)
+   +'</g>';
+  // points
+  const pts=[
+    ['LA',LA,'LA 시내',-12,-12,'end','--c-la'],
+    ['ANA',ANA,'애너하임',12,18,'start','--c-park'],
+    ['LAX',LAX,'LAX',-12,18,'end','--c-fly'],
+    ['BAR',BAR,'바스토우',10,0,'start','--c-drive'],
+    ['LV',LV,'라스베이거스',12,-6,'start','--c-drive'],
+    ['PAGE',PAGE,'페이지 · 앤텔로프 · 홀스슈 벤드',-12,-6,'end','--c-tour'],
+    ['GC',GC,'그랜드캐니언 사우스림',-10,16,'end','--c-tour'],
+    ['SD',SD,'샌디에이고',12,14,'start','--c-ext']];
+  pts.forEach(p=>{
+    const x=X(p[1][0]),y=Y(p[1][1]);
+    h+='<circle cx="'+x+'" cy="'+y+'" r="7" fill="var('+p[6]+')" stroke="var(--surface)" stroke-width="2.5"/>'
+      +'<text class="halo" x="'+(x+p[3])+'" y="'+(y+p[4])+'" text-anchor="'+p[5]+'" font-size="15" font-weight="700" fill="var(--ink)">'+p[2]+'</text>';});
+  svg.innerHTML=h;
+  document.querySelectorAll('.maptools .chip').forEach(b=>b.addEventListener('click',()=>{
+    const on=b.getAttribute('aria-pressed')!=='true';
+    b.setAttribute('aria-pressed',on);
+    document.getElementById('ext-'+b.dataset.layer).style.display=on?'':'none';
+  }));
+})();
+
+/* nav highlight */
+(function(){
+  const links=[...document.querySelectorAll('nav.top a')];
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id));}
+  }),{rootMargin:'-30% 0px -60% 0px'});
+  links.forEach(a=>{const s=document.querySelector(a.getAttribute('href'));if(s)io.observe(s);});
+})();
+</script>
+</body>
+</html>
